@@ -33,9 +33,9 @@ def get_user_input():
 
     if user_input_number == 1:
         track_coffee_for_today()
-    if user_input_number == 2:
+    elif user_input_number == 2:
         track_coffee_for_another_day()
-    if not user_input_number == 1 or user_input_number == 2:
+    else:
         print('Please try harder next time!')
 
 
