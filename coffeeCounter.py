@@ -20,10 +20,10 @@ def add_coffee_for_today():
 
     key = str(date.today())
     if key not in data:
-        save_data(key, new_value)
-    else:
-        old_value = data[key]
-        save_data(key, old_value + new_value)
+        data[key] = 0
+
+    old_value = data[key]
+    save_data(key, old_value + new_value)
 
     print('Your amount has been added in the coffee base!')
 
