@@ -13,6 +13,21 @@ def track_coffee_for_today():
     print('Your amount has been saved in the coffee base!')
 
 
+def add_coffee_for_today():
+    new_value = int(input('Please enter your amount of coffee you want to add for today: '))
+    with open(COFFEE_BASE_FILE, "r") as read_file:
+        data = json.load(read_file)
+
+    key = str(date.today())
+    if key not in data:
+        save_data(key, new_value)
+    else:
+        old_value = data[key]
+        save_data(key, old_value + new_value)
+
+    print('Your amount has been added in the coffee base!')
+
+
 def track_coffee_for_another_day():
     key = input('Please enter the date you want to track your coffee for (yyyy-mm-dd): ')
     value = int(input('Please enter your amount of coffee for this day: '))
@@ -60,15 +75,18 @@ def save_data(user_date, user_amount):
 
 if __name__ == "__main__":
     print("[1] Track Coffee for today")
-    print("[2] Track Coffee for another day")
-    print("[3] Show Coffee consumption")
+    print("[2] Add Coffee for today")
+    print("[3] Track Coffee for another day")
+    print("[4] Show Coffee consumption")
     user_input_number = int(input('Please choose a number: '))
 
     if user_input_number == 1:
         track_coffee_for_today()
     elif user_input_number == 2:
-        track_coffee_for_another_day()
+        add_coffee_for_today()
     elif user_input_number == 3:
+        track_coffee_for_another_day()
+    elif user_input_number == 4:
         print_coffee_consumption()
     else:
         print('Please try harder next time!')
