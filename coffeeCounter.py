@@ -1,7 +1,9 @@
 from datetime import date
 import json
+import os.path
 
-coffee_base = dict()
+
+COFFEE_BASE_FILE = "coffee_base.json"
 
 
 def track_coffee_for_today():
@@ -19,17 +21,23 @@ def track_coffee_for_another_day():
 
 
 def save_data(user_date, user_amount):
-    with open("coffee_base.json", "r") as read_file:
+    if not os.path.isfile(COFFEE_BASE_FILE):
+        with open(COFFEE_BASE_FILE, "w") as write_file:
+            json.dump({}, write_file)
+
+    with open(COFFEE_BASE_FILE, "r") as read_file:
         data = json.load(read_file)
+
     data[user_date] = user_amount
-    with open("coffee_base.json", "w") as write_file:
+
+    with open(COFFEE_BASE_FILE, "w") as write_file:
         json.dump(data, write_file)
 
 
-def get_user_input():
-    print("1: Track Coffee for today")
-    print("2: Track Coffee for another")
-    user_input_number = int(input('Please choose a number:'))
+if __name__ == "__main__":
+    print("[1] Track Coffee for today")
+    print("[2] Track Coffee for another day")
+    user_input_number = int(input('Please choose a number: '))
 
     if user_input_number == 1:
         track_coffee_for_today()
@@ -37,6 +45,3 @@ def get_user_input():
         track_coffee_for_another_day()
     else:
         print('Please try harder next time!')
-
-
-get_user_input()
