@@ -14,7 +14,7 @@ def track_coffee_for_today():
 
 
 def add_coffee_for_today():
-    new_value = int(input('Please enter your amount of coffee you want to add for today: '))
+    new_value = input('Please enter your amount of coffee you want to add for today (Press Enter for adding 1): ')
     with open(COFFEE_BASE_FILE, 'r') as read_file:
         data = json.load(read_file)
 
@@ -23,7 +23,10 @@ def add_coffee_for_today():
         data[key] = 0
 
     old_value = data[key]
-    save_data(key, old_value + new_value)
+    if new_value == '':
+        new_value = '1'
+
+    save_data(key, old_value + int(new_value))
 
     print('Your amount has been added in the coffee base!')
 
