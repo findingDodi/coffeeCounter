@@ -59,11 +59,13 @@ def print_coffee_consumption():
     )
 
 
-def save_data(user_date, user_amount):
+def check_for_base_file():
     if not os.path.isfile(COFFEE_BASE_FILE):
         with open(COFFEE_BASE_FILE, 'w') as write_file:
             json.dump({}, write_file)
 
+
+def save_data(user_date, user_amount):
     with open(COFFEE_BASE_FILE, 'r') as read_file:
         data = json.load(read_file)
 
@@ -74,6 +76,8 @@ def save_data(user_date, user_amount):
 
 
 if __name__ == '__main__':
+    check_for_base_file()
+
     print('[1] Track Coffee for today')
     print('[2] Add Coffee for today')
     print('[3] Track Coffee for another day')
