@@ -81,10 +81,12 @@ def save_data(user_date, user_amount):
 if __name__ == '__main__':
     check_for_base_file()
 
+    print('[0] Exit')
     print('[1] Track Coffee for today')
     print('[2] Add Coffee for today')
     print('[3] Track Coffee for another day')
     print('[4] Show Coffee consumption')
+
     user_input_number = int(input('Please choose a number: '))
 
     if user_input_number == 1:
